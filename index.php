@@ -47,3 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email WHERE id=:id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(':nombre', $_GET['nombre']);
+    $stmt->bindValue(':telefono', $_GET['telefono']);
+    $stmt->bindValue(':email', $_GET['email']);
+    $stmt->bindValue(':id', $_GET['id']);
+    $stmt->execute();
+    header("HTTP/1.1 200 OK");
+    exit;
+}
+
+?>
+
+

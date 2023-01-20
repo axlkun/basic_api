@@ -60,6 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $query = "DELETE FROM contactos WHERE id=:id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(':id', $_GET['id']);
+    $stmt->execute();
+    header("HTTP/1.1 200 OK");
+    exit;
+}
+
+header("HTTP/1.1 400 BAD REQUEST");
+
 ?>
 
 
